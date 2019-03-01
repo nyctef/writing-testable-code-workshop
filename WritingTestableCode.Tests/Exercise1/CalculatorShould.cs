@@ -42,16 +42,11 @@ namespace WritingTestableCode.Tests.Exercise1
         [Test]
         public void Use_the_result_from_a_previous_operation_in_a_subsequent_operation()
         {
-            _calculator.TypeNumber(2);
-            _calculator.PressKey(CalculatorKey.Add);
-            _calculator.TypeNumber(3);
-            _calculator.PressKey(CalculatorKey.Subtract);
-            _calculator.TypeNumber(1);
-            _calculator.PressKey(CalculatorKey.Multiply);
-            _calculator.TypeNumber(4);
-            _calculator.PressKey(CalculatorKey.Divide);
-            _calculator.TypeNumber(8);
-            _calculator.PressKey(CalculatorKey.Equal);
+            ProvideInput(2, CalculatorKey.Add);
+            ProvideInput(3, CalculatorKey.Subtract);
+            ProvideInput(1, CalculatorKey.Multiply);
+            ProvideInput(4, CalculatorKey.Divide);
+            ProvideInput(8, CalculatorKey.Equal);
 
             _calculator.Display.Should().Be(2);
         }
@@ -59,10 +54,8 @@ namespace WritingTestableCode.Tests.Exercise1
         [Test]
         public void Display_partial_results_for_multi_step_operation()
         {
-            _calculator.TypeNumber(3);
-            _calculator.PressKey(CalculatorKey.Add);
-            _calculator.TypeNumber(4);
-            _calculator.PressKey(CalculatorKey.Subtract);
+            ProvideInput(3, CalculatorKey.Add);
+            ProvideInput(4, CalculatorKey.Subtract);
 
             _calculator.Display.Should().Be(7);
         }
@@ -70,22 +63,24 @@ namespace WritingTestableCode.Tests.Exercise1
         [Test]
         public void Refresh_result()
         {
-            _calculator.TypeNumber(1);
-            _calculator.PressKey(CalculatorKey.Equal);
-            _calculator.TypeNumber(2);
-            _calculator.PressKey(CalculatorKey.Equal);
+            ProvideInput(1, CalculatorKey.Equal);
+            ProvideInput(2, CalculatorKey.Equal);
 
             _calculator.Display.Should().Be(2);
         }
 
         private double PerformOperation(double leftOperand, CalculatorKey operation, double rightOperand)
         {
-            _calculator.TypeNumber(leftOperand);
-            _calculator.PressKey(operation);
-            _calculator.TypeNumber(rightOperand);
-            _calculator.PressKey(CalculatorKey.Equal);
+            ProvideInput(leftOperand, operation);
+            ProvideInput(rightOperand, CalculatorKey.Equal);
 
             return _calculator.Display;
+        }
+
+        private void ProvideInput(double number, CalculatorKey key)
+        {
+            _calculator.TypeNumber(number);
+            _calculator.PressKey(key);
         }
     }
 }
