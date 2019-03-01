@@ -79,8 +79,7 @@ namespace WritingTestableCode.Tests.Exercise1
 
         private void ProvideInput(double number, CalculatorKey key)
         {
-            _calculator.TypeNumber(number);
-            _calculator.PressKey(key);
+            _calculator.Input(number, key);
         }
 
         private double Result => _calculator.Display;

@@ -8,13 +8,10 @@ namespace WritingTestableCode.Exercise1
         private readonly Queue<double> _numbers = new Queue<double>();
         private CalculatorKey _key;
 
-        public void TypeNumber(double number)
+        public void Input(double number, CalculatorKey key)
         {
             _numbers.Enqueue(number);
-        }
 
-        public void PressKey(CalculatorKey key)
-        {
             if (_numbers.Count > 1)
             {
                 var leftOperand = _numbers.Dequeue();
