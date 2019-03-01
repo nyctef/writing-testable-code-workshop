@@ -48,7 +48,7 @@ namespace WritingTestableCode.Tests.Exercise1
             ProvideInput(4, CalculatorKey.Divide);
             ProvideInput(8, CalculatorKey.Equal);
 
-            _calculator.Display.Should().Be(2);
+            Result.Should().Be(2);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace WritingTestableCode.Tests.Exercise1
             ProvideInput(3, CalculatorKey.Add);
             ProvideInput(4, CalculatorKey.Subtract);
 
-            _calculator.Display.Should().Be(7);
+            Result.Should().Be(7);
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace WritingTestableCode.Tests.Exercise1
             ProvideInput(1, CalculatorKey.Equal);
             ProvideInput(2, CalculatorKey.Equal);
 
-            _calculator.Display.Should().Be(2);
+            Result.Should().Be(2);
         }
 
         private double PerformOperation(double leftOperand, CalculatorKey operation, double rightOperand)
@@ -74,7 +74,7 @@ namespace WritingTestableCode.Tests.Exercise1
             ProvideInput(leftOperand, operation);
             ProvideInput(rightOperand, CalculatorKey.Equal);
 
-            return _calculator.Display;
+            return Result;
         }
 
         private void ProvideInput(double number, CalculatorKey key)
@@ -82,5 +82,7 @@ namespace WritingTestableCode.Tests.Exercise1
             _calculator.TypeNumber(number);
             _calculator.PressKey(key);
         }
+
+        private double Result => _calculator.Display;
     }
 }
