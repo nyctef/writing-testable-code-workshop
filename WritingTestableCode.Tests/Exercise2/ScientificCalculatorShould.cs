@@ -18,9 +18,9 @@ namespace WritingTestableCode.Tests.Exercise2
         [Test]
         public void Add_two_numbers()
         {
-            Input(new Number(2));
+            Input(Number(2));
             Input(new Operator((a, b) => a + b));
-            Input(new Number(3));
+            Input(Number(3));
             Input(new Operator((a, b) => b));
 
             Result.Should().Be(5);
@@ -29,9 +29,9 @@ namespace WritingTestableCode.Tests.Exercise2
         [Test]
         public void Subtract_two_numbers()
         {
-            Input(new Number(5));
+            Input(Number(5));
             Input(new Operator((a, b) => a - b));
-            Input(new Number(3));
+            Input(Number(3));
             Input(new Operator((a, b) => b));
 
             Result.Should().Be(2);
@@ -40,9 +40,9 @@ namespace WritingTestableCode.Tests.Exercise2
         [Test]
         public void Multiply_two_numbers()
         {
-            Input(new Number(2));
+            Input(Number(2));
             Input(new Operator((a, b) => a * b));
-            Input(new Number(3));
+            Input(Number(3));
             Input(new Operator((a, b) => b));
 
             Result.Should().Be(6);
@@ -51,9 +51,9 @@ namespace WritingTestableCode.Tests.Exercise2
         [Test]
         public void Divide_two_numbers()
         {
-            Input(new Number(6));
+            Input(Number(6));
             Input(new Operator((a, b) => a / b));
-            Input(new Number(3));
+            Input(Number(3));
             Input(new Operator((a, b) => b));
 
             Result.Should().Be(2);
@@ -62,15 +62,15 @@ namespace WritingTestableCode.Tests.Exercise2
         [Test]
         public void Use_the_result_from_a_previous_operation_in_a_subsequent_operation()
         {
-            Input(new Number(2));
+            Input(Number(2));
             Input(new Operator((a, b) => a + b));
-            Input(new Number(3));
+            Input(Number(3));
             Input(new Operator((a, b) => a - b));
-            Input(new Number(1));
+            Input(Number(1));
             Input(new Operator((a, b) => a * b));
-            Input(new Number(4));
+            Input(Number(4));
             Input(new Operator((a, b) => a / b));
-            Input(new Number(8));
+            Input(Number(8));
             Input(new Operator((a, b) => b));
 
             Result.Should().Be(2);
@@ -79,9 +79,9 @@ namespace WritingTestableCode.Tests.Exercise2
         [Test]
         public void Display_partial_results_for_multi_step_operation()
         {
-            Input(new Number(3));
+            Input(Number(3));
             Input(new Operator((a, b) => a + b));
-            Input(new Number(4));
+            Input(Number(4));
             Input(new Operator((a, b) => a - b));
 
             Result.Should().Be(7);
@@ -90,9 +90,9 @@ namespace WritingTestableCode.Tests.Exercise2
         [Test]
         public void Refresh_result()
         {
-            Input(new Number(1));
+            Input(Number(1));
             Input(new Operator((a, b) => b));
-            Input(new Number(2));
+            Input(Number(2));
             Input(new Operator((a, b) => b));
 
             Result.Should().Be(2);
@@ -101,20 +101,22 @@ namespace WritingTestableCode.Tests.Exercise2
         [Test]
         public void Have_a_memory()
         {
-            Input(new Number(10));
+            Input(Number(10));
             Input(new Operator((a, b) => a + b));
-            Input(new Number(5));
+            Input(Number(5));
             Input(new MemoryFunction("Add"));
             Clear();
-            Input(new Number(12));
+            Input(Number(12));
             Input(new MemoryFunction("Subtract"));
             Clear();
-            Input(new Number(3));
+            Input(Number(3));
             Input(new Operator((a, b) => a + b));
             Input(new MemoryFunction("Recall"));
 
             Result.Should().Be(6);
         }
+
+        private static ICalculatorInput Number(double value) => new Number(value);
 
         private void Input(ICalculatorInput input)
         {
