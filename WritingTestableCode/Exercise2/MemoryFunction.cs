@@ -6,7 +6,7 @@ namespace WritingTestableCode.Exercise2
 
         private readonly string _name;
 
-        public MemoryFunction(string name)
+        private MemoryFunction(string name)
         {
             _name = name;
         }
@@ -26,5 +26,11 @@ namespace WritingTestableCode.Exercise2
                     break;
             }
         }
+
+        public static readonly MemoryFunction Add = new MemoryFunction("Add");
+
+        public static readonly MemoryFunction Subtract = new MemoryFunction("Subtract");
+
+        public static readonly MemoryFunction Recall = new MemoryFunction("Recall");
     }
 }

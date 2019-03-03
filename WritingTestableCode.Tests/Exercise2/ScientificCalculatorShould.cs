@@ -95,11 +95,11 @@ namespace WritingTestableCode.Tests.Exercise2
 
         private static ICalculatorInput EqualOperator => Operator.Equal;
 
-        private static ICalculatorInput AddMemoryFunction => new MemoryFunction("Add");
+        private static ICalculatorInput AddMemoryFunction => MemoryFunction.Add;
 
-        private static ICalculatorInput SubtractMemoryFunction => new MemoryFunction("Subtract");
+        private static ICalculatorInput SubtractMemoryFunction => MemoryFunction.Subtract;
 
-        private static ICalculatorInput RecallMemoryFunction => new MemoryFunction("Recall");
+        private static ICalculatorInput RecallMemoryFunction => MemoryFunction.Recall;
 
         private void Input(params ICalculatorInput[] inputs)
         {
