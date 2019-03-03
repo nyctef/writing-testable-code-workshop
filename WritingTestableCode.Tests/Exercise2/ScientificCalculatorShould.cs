@@ -104,14 +104,14 @@ namespace WritingTestableCode.Tests.Exercise2
             Input(Number(10));
             Input(AddOperator);
             Input(Number(5));
-            Input(new MemoryFunction("Add"));
+            Input(AddMemoryFunction);
             Clear();
             Input(Number(12));
-            Input(new MemoryFunction("Subtract"));
+            Input(SubtractMemoryFunction);
             Clear();
             Input(Number(3));
             Input(AddOperator);
-            Input(new MemoryFunction("Recall"));
+            Input(RecallMemoryFunction);
 
             Result.Should().Be(6);
         }
@@ -127,6 +127,12 @@ namespace WritingTestableCode.Tests.Exercise2
         private static ICalculatorInput DivideOperator => new Operator((a, b) => a / b);
 
         private static ICalculatorInput EqualOperator => new Operator((a, b) => b);
+
+        private static ICalculatorInput AddMemoryFunction => new MemoryFunction("Add");
+
+        private static ICalculatorInput SubtractMemoryFunction => new MemoryFunction("Subtract");
+
+        private static ICalculatorInput RecallMemoryFunction => new MemoryFunction("Recall");
 
         private void Input(ICalculatorInput input)
         {
