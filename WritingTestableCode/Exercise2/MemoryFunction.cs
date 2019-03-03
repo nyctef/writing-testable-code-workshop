@@ -1,36 +1,27 @@
+using System;
+
 namespace WritingTestableCode.Exercise2
 {
     public class MemoryFunction : ICalculatorInput
     {
         private static double _memory;
 
-        private readonly string _name;
+        private readonly Action<CalculatorRegister> _applyTo;
 
-        private MemoryFunction(string name)
+        private MemoryFunction(Action<CalculatorRegister> applyTo)
         {
-            _name = name;
+            _applyTo = applyTo;
         }
 
         public void ApplyTo(CalculatorRegister register)
         {
-            switch (_name)
-            {
-                case "Add":
-                    _memory += register.Value;
-                    break;
-                case "Subtract":
-                    _memory -= register.Value;
-                    break;
-                case "Recall":
-                    register.Value = _memory;
-                    break;
-            }
+            _applyTo(register);
         }
 
-        public static readonly MemoryFunction Add = new MemoryFunction("Add");
+        public static readonly MemoryFunction Add = new MemoryFunction(r => _memory += r.Value);
 
-        public static readonly MemoryFunction Subtract = new MemoryFunction("Subtract");
+        public static readonly MemoryFunction Subtract = new MemoryFunction(r => _memory -= r.Value);
 
-        public static readonly MemoryFunction Recall = new MemoryFunction("Recall");
+        public static readonly MemoryFunction Recall = new MemoryFunction(r => r.Value = _memory);
     }
 }
