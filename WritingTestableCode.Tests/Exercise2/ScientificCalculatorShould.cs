@@ -103,10 +103,7 @@ namespace WritingTestableCode.Tests.Exercise2
 
         private void Input(params ICalculatorInput[] inputs)
         {
-            foreach (var input in inputs)
-            {
-                _calculator.Input(input);
-            }
+            _calculator.Input(inputs);
         }
 
         private void Clear()
