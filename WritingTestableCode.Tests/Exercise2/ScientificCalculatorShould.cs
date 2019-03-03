@@ -85,15 +85,15 @@ namespace WritingTestableCode.Tests.Exercise2
 
         private static ICalculatorInput Number(double value) => new Number(value);
 
-        private static ICalculatorInput AddOperator => new Operator((a, b) => a + b);
+        private static ICalculatorInput AddOperator => Operator.Add;
 
-        private static ICalculatorInput SubtractOperator => new Operator((a, b) => a - b);
+        private static ICalculatorInput SubtractOperator => Operator.Subtract;
 
-        private static ICalculatorInput MultiplyOperator => new Operator((a, b) => a * b);
+        private static ICalculatorInput MultiplyOperator => Operator.Multiply;
 
-        private static ICalculatorInput DivideOperator => new Operator((a, b) => a / b);
+        private static ICalculatorInput DivideOperator => Operator.Divide;
 
-        private static ICalculatorInput EqualOperator => new Operator((a, b) => b);
+        private static ICalculatorInput EqualOperator => Operator.Equal;
 
         private static ICalculatorInput AddMemoryFunction => new MemoryFunction("Add");
 
