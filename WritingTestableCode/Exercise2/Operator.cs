@@ -2,7 +2,7 @@ using System;
 
 namespace WritingTestableCode.Exercise2
 {
-    public class Operator : ICalculatorInput
+    internal class Operator : ICalculatorInput
     {
         private readonly Func<double, double, double> _operation;
 

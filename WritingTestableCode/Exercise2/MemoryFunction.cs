@@ -1,6 +1,6 @@
 namespace WritingTestableCode.Exercise2
 {
-    public class MemoryFunction : ICalculatorInput
+    internal class MemoryFunction : ICalculatorInput
     {
         private static double _memory;
 

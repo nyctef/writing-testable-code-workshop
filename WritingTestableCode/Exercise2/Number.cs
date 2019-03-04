@@ -1,6 +1,6 @@
 namespace WritingTestableCode.Exercise2
 {
-    public class Number : ICalculatorInput
+    internal class Number : ICalculatorInput
     {
         private readonly double _value;
 
