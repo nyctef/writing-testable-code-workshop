@@ -7,15 +7,25 @@ namespace WritingTestableCode.Tests.Exercise2
     [TestFixture]
     public class ScientificCalculatorShould
     {
+        public ICalculatorInput Number(int num) => new Number(num);
+        public ICalculatorInput Add() => new Operator((x,y) => x+y);
+        public ICalculatorInput Subtract() =>  new Operator((x,y) => x-y);
+        public ICalculatorInput Multiply() =>  new Operator((x,y) => x*y);
+        public ICalculatorInput Divide() =>  new Operator((x,y) => x/y);
+        public ICalculatorInput Equals() =>  new Operator((x,y) => y);
+        public ICalculatorInput AddToMemory() => new MemoryFunction("Add");
+        public ICalculatorInput SubtractFromMemory() => new MemoryFunction("Subtract");
+        public ICalculatorInput FetchFromMemory() => new MemoryFunction("Recall");
+
         [Test]
         public void Add_two_numbers()
         {
             var calculator = new ScientificCalculator();
 
-            calculator.Input(new Number(2));
-            calculator.Input(new Operator((a, b) => a + b));
-            calculator.Input(new Number(3));
-            calculator.Input(new Operator((a, b) => b));
+            calculator.Input(Number(2));
+            calculator.Input(Add());
+            calculator.Input(Number(3));
+            calculator.Input(Equals());
 
             calculator.Display.Should().Be(5);
         }
@@ -25,10 +35,10 @@ namespace WritingTestableCode.Tests.Exercise2
         {
             var calculator = new ScientificCalculator();
 
-            calculator.Input(new Number(5));
-            calculator.Input(new Operator((a, b) => a - b));
-            calculator.Input(new Number(3));
-            calculator.Input(new Operator((a, b) => b));
+            calculator.Input(Number(5));
+            calculator.Input(Subtract());
+            calculator.Input(Number(3));
+            calculator.Input(Equals());
 
             calculator.Display.Should().Be(2);
         }
@@ -38,10 +48,10 @@ namespace WritingTestableCode.Tests.Exercise2
         {
             var calculator = new ScientificCalculator();
 
-            calculator.Input(new Number(2));
-            calculator.Input(new Operator((a, b) => a * b));
-            calculator.Input(new Number(3));
-            calculator.Input(new Operator((a, b) => b));
+            calculator.Input(Number(2));
+            calculator.Input(Multiply());
+            calculator.Input(Number(3));
+            calculator.Input(Equals());
 
             calculator.Display.Should().Be(6);
         }
@@ -51,10 +61,10 @@ namespace WritingTestableCode.Tests.Exercise2
         {
             var calculator = new ScientificCalculator();
 
-            calculator.Input(new Number(6));
-            calculator.Input(new Operator((a, b) => a / b));
-            calculator.Input(new Number(3));
-            calculator.Input(new Operator((a, b) => b));
+            calculator.Input(Number(6));
+            calculator.Input(Divide());
+            calculator.Input(Number(3));
+            calculator.Input(Equals());
 
             calculator.Display.Should().Be(2);
         }
@@ -64,16 +74,16 @@ namespace WritingTestableCode.Tests.Exercise2
         {
             var calculator = new ScientificCalculator();
 
-            calculator.Input(new Number(2));
-            calculator.Input(new Operator((a, b) => a + b));
-            calculator.Input(new Number(3));
-            calculator.Input(new Operator((a, b) => a - b));
-            calculator.Input(new Number(1));
-            calculator.Input(new Operator((a, b) => a * b));
-            calculator.Input(new Number(4));
-            calculator.Input(new Operator((a, b) => a / b));
-            calculator.Input(new Number(8));
-            calculator.Input(new Operator((a, b) => b));
+            calculator.Input(Number(2));
+            calculator.Input(Add());
+            calculator.Input(Number(3));
+            calculator.Input(Subtract());
+            calculator.Input(Number(1));
+            calculator.Input(Multiply());
+            calculator.Input(Number(4));
+            calculator.Input(Divide());
+            calculator.Input(Number(8));
+            calculator.Input(Equals());
 
             calculator.Display.Should().Be(2);
         }
@@ -83,10 +93,10 @@ namespace WritingTestableCode.Tests.Exercise2
         {
             var calculator = new ScientificCalculator();
 
-            calculator.Input(new Number(3));
-            calculator.Input(new Operator((a, b) => a + b));
-            calculator.Input(new Number(4));
-            calculator.Input(new Operator((a, b) => a - b));
+            calculator.Input(Number(3));
+            calculator.Input(Add());
+            calculator.Input(Number(4));
+            calculator.Input(Subtract());
 
             calculator.Display.Should().Be(7);
         }
@@ -96,10 +106,10 @@ namespace WritingTestableCode.Tests.Exercise2
         {
             var calculator = new ScientificCalculator();
 
-            calculator.Input(new Number(1));
-            calculator.Input(new Operator((a, b) => b));
-            calculator.Input(new Number(2));
-            calculator.Input(new Operator((a, b) => b));
+            calculator.Input(Number(1));
+            calculator.Input(Equals());
+            calculator.Input(Number(2));
+            calculator.Input(Equals());
 
             calculator.Display.Should().Be(2);
         }
@@ -109,17 +119,17 @@ namespace WritingTestableCode.Tests.Exercise2
         {
             var calculator = new ScientificCalculator();
 
-            calculator.Input(new Number(10));
-            calculator.Input(new Operator((a, b) => a + b));
-            calculator.Input(new Number(5));
-            calculator.Input(new MemoryFunction("Add"));
+            calculator.Input(Number(10));
+            calculator.Input(Add());
+            calculator.Input(Number(5));
+            calculator.Input(AddToMemory());
             calculator.Clear();
-            calculator.Input(new Number(12));
-            calculator.Input(new MemoryFunction("Subtract"));
+            calculator.Input(Number(12));
+            calculator.Input(SubtractFromMemory());
             calculator.Clear();
-            calculator.Input(new Number(3));
-            calculator.Input(new Operator((a, b) => a + b));
-            calculator.Input(new MemoryFunction("Recall"));
+            calculator.Input(Number(3));
+            calculator.Input(Add());
+            calculator.Input(FetchFromMemory());
 
             calculator.Display.Should().Be(6);
         }
